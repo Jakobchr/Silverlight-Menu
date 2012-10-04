@@ -28,7 +28,7 @@ namespace MenuControl
     public class MenuItem : Control, IMenuItem
     {
         //graphic elements
-        public Canvas RootMenuItem;
+        public Grid RootMenuItem;
         public Grid LayoutRootMenuItem;
         public TextBlock ItemTextMI;
         public Grid ItemHighlightMenuItem;
@@ -79,7 +79,7 @@ namespace MenuControl
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            RootMenuItem = (Canvas)GetTemplateChild("RootMenuItem");
+            RootMenuItem = (Grid)GetTemplateChild("RootMenuItem");
             LayoutRootMenuItem = (Grid)GetTemplateChild("LayoutRootMenuItem");
             ItemTextMI = (TextBlock)GetTemplateChild("ItemTextMI");
             ItemHighlightMenuItem = (Grid)GetTemplateChild("ItemHighlightMenuItem");
@@ -140,7 +140,7 @@ namespace MenuControl
                 Point xy = getLargest(Items);
                 xy.X += 15; //add space for arrow placement
 
-                arrow.SetValue(Canvas.LeftProperty, this.xy.X + 12);
+                //arrow.SetValue(Canvas.LeftProperty, this.xy.X + 12);
                 //arrowHighlight.SetValue(Canvas.LeftProperty, this.xy.X + 12);
 
                 //set menu holder dimensions

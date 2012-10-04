@@ -36,7 +36,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="GenericControl:MenuBarItem">
-                    <Canvas Canvas.ZIndex="1000" x:Name="RootMenuBarItem">
+                    <Grid Canvas.ZIndex="1000" x:Name="RootMenuBarItem">
 
                         <vsm:VisualStateManager.VisualStateGroups>
                             <vsm:VisualStateGroup x:Name="menuNavigationMBI">
@@ -99,20 +99,22 @@
 
                         </Grid>
 
-                        <Canvas x:Name="ItemDropDownMenuBarItem" Opacity="1" Visibility="Collapsed">
-                            <Border x:Name="RootItemDropDownMenuBarItem"
-                                    Canvas.ZIndex="1"  CornerRadius="0,0,0,0" BorderBrush="Gray" BorderThickness="1,0,1,1" >
-                                <Border.Background>
-                                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                                        <GradientStop Color="#f8f4f3fc" Offset="0.0"/>
-                                        <GradientStop Color="#f8d4d8e6" Offset="1.0"/>
-                                    </LinearGradientBrush>
-                                </Border.Background>
-                            </Border>
-                            <StackPanel x:Name="ItemHolderMenuBarItem" Orientation="Vertical"  Canvas.ZIndex="2">
-                            </StackPanel>
+                        <Canvas x:Name="SubMenuDropDown" Opacity="1" Margin="0">
+                            <Canvas x:Name="ItemDropDownMenuBarItem" Opacity="1" Visibility="Collapsed">
+                                <Border x:Name="RootItemDropDownMenuBarItem"
+                                        Canvas.ZIndex="1"  CornerRadius="0,0,0,0" BorderBrush="Gray" BorderThickness="1,0,1,1" >
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                            <GradientStop Color="#f8f4f3fc" Offset="0.0"/>
+                                            <GradientStop Color="#f8d4d8e6" Offset="1.0"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                                <StackPanel x:Name="ItemHolderMenuBarItem" Orientation="Vertical"  Canvas.ZIndex="2">
+                                </StackPanel>
+                            </Canvas>
                         </Canvas>
-                    </Canvas>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -122,7 +124,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="GenericControl:MenuItem">
-                    <Canvas x:Name="RootMenuItem">
+                    <Grid x:Name="RootMenuItem">
 
                         <vsm:VisualStateManager.VisualStateGroups>
                             <vsm:VisualStateGroup x:Name="menuNavigationMI">
@@ -145,7 +147,7 @@
                             </vsm:VisualStateGroup>
                         </vsm:VisualStateManager.VisualStateGroups>
 
-                        <Grid x:Name="LayoutRootMenuItem" Background="Transparent" ShowGridLines="True">
+                        <Grid x:Name="LayoutRootMenuItem" Background="Transparent">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="16"/>
                                 <ColumnDefinition Width="*"/>
@@ -193,7 +195,7 @@
                             </Canvas>
 
                         </Grid>
-                    </Canvas>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

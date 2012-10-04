@@ -26,7 +26,8 @@ namespace MenuTester
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            this.RootVisual = new Page();
+            //this.RootVisual = new Page();
+            this.RootVisual = new SilverlightControl1();
         }
 
         private void Application_Exit(object sender, EventArgs e)

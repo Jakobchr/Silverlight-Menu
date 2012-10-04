@@ -145,6 +145,7 @@ namespace MenuControl
                 //set menu holder dimensions
                 ItemDropDownMenuBarItem.Width = xy.X + 23;
                 RootItemDropDownMenuBarItem.Width = xy.X + 23;
+                ItemHolderMenuBarItem.Width = xy.X + 23;
 
                 ItemDropDownMenuBarItem.SetValue(Canvas.TopProperty, Height); //LayoutRootMenuBarItem.Height);
 
@@ -153,6 +154,8 @@ namespace MenuControl
                 // for margins
                 ItemDropDownMenuBarItem.Height = (xy.Y + 10) * (Items.Count) + 8;
                 RootItemDropDownMenuBarItem.Height = (xy.Y + 10) * (Items.Count) + 8;
+                
+
 
                 foreach (MenuItem item in Items)
                 {

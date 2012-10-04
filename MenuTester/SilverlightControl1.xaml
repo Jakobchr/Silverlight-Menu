@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="MenuTester.SilverlightControl1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    
+    <Grid x:Name="LayoutRoot" Height="600" Width="500">
+        <StackPanel x:Name="test" MouseLeave="Border_MouseLeave" Background="Blue">
+            <Border x:Name="menu" Background="DarkMagenta" BorderBrush="Black" CornerRadius="6,6,0,0" Height="30" Width="100" BorderThickness="2,2,2,0" MouseEnter="TextBlock_MouseEnter" MouseLeave="TextBlock_MouseEnter">
+                <TextBlock Text="Menu" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            />
+            </Border>
+            <Popup x:Name="popup" IsOpen="True">
+                <Border Background="DarkMagenta" BorderBrush="Black" CornerRadius="0,0,6,6" BorderThickness="2,0,2,2" Width="100">
+                    <StackPanel>
+                        <TextBlock Text="Hello" x:Name="popuptext" HorizontalAlignment="Center" Height="30" />
+                        <TextBlock Text="World" HorizontalAlignment="Center" Height="30"/>
+                        <TextBlock Text="World!" HorizontalAlignment="Center" Height="30"/>
+                    </StackPanel>
+                </Border>
+            </Popup>
+        </StackPanel>
+    </Grid>
+</UserControl>
