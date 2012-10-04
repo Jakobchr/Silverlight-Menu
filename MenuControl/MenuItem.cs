@@ -16,11 +16,11 @@ using System.Windows.Threading;
 namespace MenuControl
 {
 
-    [TemplatePart(Name = "LayoutRootMI2", Type = typeof(Canvas))]
+    [TemplatePart(Name = "LayoutRootMenuItem", Type = typeof(Grid))]
     [TemplatePart(Name = "ItemTextMI", Type = typeof(TextBlock))]
-    [TemplatePart(Name = "ItemHighlightMI", Type = typeof(Canvas))]
-    [TemplatePart(Name = "ItemHighlightrMI", Type = typeof(Rectangle))]
-    [TemplatePart(Name = "ItemText_copyMI", Type = typeof(TextBlock))]
+    [TemplatePart(Name = "ItemHighlightMenuItem", Type = typeof(Canvas))]
+    [TemplatePart(Name = "ItemHighlightBorderMenuItem", Type = typeof(Rectangle))]
+    //[TemplatePart(Name = "ItemText_copyMI", Type = typeof(TextBlock))]
     [TemplateVisualState(Name = "ItemHighlightedMI", GroupName = "menuNavigationMI")]
     [TemplateVisualState(Name = "noneHighlightedMI", GroupName = "menuNavigationMI")]
 
@@ -28,17 +28,17 @@ namespace MenuControl
     public class MenuItem : Control, IMenuItem
     {
         //graphic elements
-        public Canvas LayoutRootMI;
-        public Canvas LayoutRootMI2;
+        public Canvas RootMenuItem;
+        public Grid LayoutRootMenuItem;
         public TextBlock ItemTextMI;
-        public Canvas ItemHighlightMI;
-        public Border ItemHighlightrMI;
-        public TextBlock ItemText_copyMI;
+        public Grid ItemHighlightMenuItem;
+        public Border ItemHighlightBorderMenuItem;
+        //public TextBlock ItemText_copyMI;
         public Path arrow;
-        public Path arrowHighlight;
-        public Canvas ItemDropDownMI;
+        //public Path arrowHighlight;
+        public Canvas ItemDropDownMenuItem;
         public Border baseRectMI;
-        public StackPanel itemHolderMI;
+        public StackPanel ItemHolderMenuItem;
         public Canvas SubMenuDropDown;
         private bool isNested;
 
@@ -79,44 +79,44 @@ namespace MenuControl
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            LayoutRootMI = (Canvas)GetTemplateChild("LayoutRootMI");
-            LayoutRootMI2 = (Canvas)GetTemplateChild("LayoutRootMI2");
+            RootMenuItem = (Canvas)GetTemplateChild("RootMenuItem");
+            LayoutRootMenuItem = (Grid)GetTemplateChild("LayoutRootMenuItem");
             ItemTextMI = (TextBlock)GetTemplateChild("ItemTextMI");
-            ItemHighlightMI = (Canvas)GetTemplateChild("ItemHighlightMI");
-            ItemHighlightrMI = (Border)GetTemplateChild("ItemHighlightrMI");
-            ItemText_copyMI = (TextBlock)GetTemplateChild("ItemText_copyMI");
+            ItemHighlightMenuItem = (Grid)GetTemplateChild("ItemHighlightMenuItem");
+            ItemHighlightBorderMenuItem = (Border)GetTemplateChild("ItemHighlightBorderMenuItem");
+            //ItemText_copyMI = (TextBlock)GetTemplateChild("ItemText_copyMI");
             arrow = (Path)GetTemplateChild("arrow");
-            arrowHighlight = (Path)GetTemplateChild("arrowHighlight");
-            ItemDropDownMI = (Canvas)GetTemplateChild("ItemDropDownMI");
+            //arrowHighlight = (Path)GetTemplateChild("arrowHighlight");
+            ItemDropDownMenuItem = (Canvas)GetTemplateChild("ItemDropDownMenuItem");
             SubMenuDropDown = (Canvas)GetTemplateChild("SubMenuDropDown");
             baseRectMI = (Border)GetTemplateChild("baseRectMI");
-            itemHolderMI = (StackPanel)GetTemplateChild("itemHolderMI");
+            ItemHolderMenuItem = (StackPanel)GetTemplateChild("ItemHolderMenuItem");
 
             _Icon = (Image)GetTemplateChild("ElementIcon");
 
             if (this._Icon != null && this.Icon != null)
                 _Icon.Source = Icon;
 
-            ItemHighlightMI.MouseEnter += new MouseEventHandler(ItemHighlight_MouseEnter);
-            ItemHighlightMI.MouseLeave += new MouseEventHandler(ItemHighlight_MouseLeave);
-            ItemHighlightMI.MouseLeftButtonDown += new MouseButtonEventHandler(ItemHighlight_MouseLeftButtonDown);
-            ItemDropDownMI.MouseLeave += new MouseEventHandler(ItemDropDownMI_MouseLeave);
+            ItemHighlightMenuItem.MouseEnter += new MouseEventHandler(ItemHighlight_MouseEnter);
+            ItemHighlightMenuItem.MouseLeave += new MouseEventHandler(ItemHighlight_MouseLeave);
+            ItemHighlightMenuItem.MouseLeftButtonDown += new MouseButtonEventHandler(ItemHighlight_MouseLeftButtonDown);
+            ItemDropDownMenuItem.MouseLeave += new MouseEventHandler(ItemDropDownMenuItem_MouseLeave);
 
             // set dimensions
             ItemTextMI.Width = xy.X;
             ItemTextMI.Height = xy.Y;
 
-            ItemText_copyMI.Width = xy.X;
-            ItemText_copyMI.Height = xy.Y;
+            //ItemText_copyMI.Width = xy.X;
+            //ItemText_copyMI.Height = xy.Y;
 
 
             //set width and height for canvas
-            LayoutRootMI.Width = xy.X + 15;
-            LayoutRootMI.Height = xy.Y + 10;
-            ItemHighlightMI.Width = xy.X + 15;
-            ItemHighlightMI.Height = xy.Y + 10;
-            ItemHighlightrMI.Width = xy.X + 15;
-            ItemHighlightrMI.Height = xy.Y + 10;
+            RootMenuItem.Width = xy.X + 15;
+            RootMenuItem.Height = xy.Y + 10;
+            ItemHighlightMenuItem.Width = xy.X + 15;
+            ItemHighlightMenuItem.Height = xy.Y + 10;
+            ItemHighlightBorderMenuItem.Width = xy.X + 15;
+            ItemHighlightBorderMenuItem.Height = xy.Y + 10;
 
         }
 
@@ -127,7 +127,7 @@ namespace MenuControl
             if (!string.IsNullOrEmpty(MenuText))
             {
                 ItemTextMI.Text = MenuText;
-                ItemText_copyMI.Text = MenuText;
+                //ItemText_copyMI.Text = MenuText;
             }
 
             // add menu Items if any exists
@@ -135,25 +135,25 @@ namespace MenuControl
             {
                 isNested = true;
                 arrow.Visibility = Visibility.Visible;
-                arrowHighlight.Visibility = Visibility.Visible;
+                //arrowHighlight.Visibility = Visibility.Visible;
 
                 Point xy = getLargest(Items);
                 xy.X += 15; //add space for arrow placement
 
                 arrow.SetValue(Canvas.LeftProperty, this.xy.X + 12);
-                arrowHighlight.SetValue(Canvas.LeftProperty, this.xy.X + 12);
+                //arrowHighlight.SetValue(Canvas.LeftProperty, this.xy.X + 12);
 
                 //set menu holder dimensions
-                ItemDropDownMI.Width = xy.X + 23;
+                ItemDropDownMenuItem.Width = xy.X + 23;
                 baseRectMI.Width = xy.X + 23;
 
-                //ItemDropDownMI.SetValue(Canvas.TopProperty, LayoutRootMI.Height);
-                ItemDropDownMI.SetValue(Canvas.LeftProperty, LayoutRootMI.Width + 5);
+                //ItemDropDownMenuItem.SetValue(Canvas.TopProperty, RootMenuItem.Height);
+                ItemDropDownMenuItem.SetValue(Canvas.LeftProperty, RootMenuItem.Width + 5);
 
                 // height is the height of the textbox plus 10 since we add 10
                 //for the box around the text box. Then multiply by count and add 10
                 // for margins
-                ItemDropDownMI.Height = (xy.Y + 10) * (Items.Count) + 8;
+                ItemDropDownMenuItem.Height = (xy.Y + 10) * (Items.Count) + 8;
                 baseRectMI.Height = (xy.Y + 10) * (Items.Count) + 8;
 
 
@@ -162,7 +162,7 @@ namespace MenuControl
                     //set menuItem dimensions before adding
                     item.setDimension(xy);
                     item.parentMenuItem = this;
-                    itemHolderMI.Children.Add(item);
+                    ItemHolderMenuItem.Children.Add(item);
                 }
             }
         }
@@ -182,12 +182,12 @@ namespace MenuControl
                     item.CollapseDropDown();
                 }
             }
-            ItemDropDownMI.Visibility = Visibility.Collapsed;
+            ItemDropDownMenuItem.Visibility = Visibility.Collapsed;
         }
 
         public void ShowDropDown()
         {
-            ItemDropDownMI.Visibility = Visibility.Visible;
+            ItemDropDownMenuItem.Visibility = Visibility.Visible;
         }
 
         internal void CollapseChildDropDownMenus()
@@ -322,7 +322,7 @@ namespace MenuControl
                 MouseOverTimer.Stop();
         }
 
-        void ItemDropDownMI_MouseLeave(object sender, MouseEventArgs e)
+        void ItemDropDownMenuItem_MouseLeave(object sender, MouseEventArgs e)
         {
             CollapseDropDown();
         }
@@ -349,8 +349,8 @@ namespace MenuControl
             double actualWidth = this.ActualWidth;
             Point p = this.TransformFromRootVisual();
 
-            if ((p.X + this.ActualWidth + ItemDropDownMI.Width) > wholeWidth)
-                Canvas.SetLeft(ItemDropDownMI, -(ItemDropDownMI.Width));
+            if ((p.X + this.ActualWidth + ItemDropDownMenuItem.Width) > wholeWidth)
+                Canvas.SetLeft(ItemDropDownMenuItem, -(ItemDropDownMenuItem.Width));
 
             ShowDropDown();
         }

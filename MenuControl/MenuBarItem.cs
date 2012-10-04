@@ -17,16 +17,16 @@ using System.Windows.Threading;
 namespace MenuControl
 {
     [TemplatePart(Name = "LayoutRootMenuBarItem", Type = typeof(Grid))]
-    [TemplatePart(Name = "ItemrMBI", Type = typeof(Border))]
+    [TemplatePart(Name = "ItemBorderMenuBarItem", Type = typeof(Border))]
     [TemplatePart(Name = "ItemTextMBI", Type = typeof(TextBlock))]
-    [TemplatePart(Name = "ItemHighlightMBI", Type = typeof(Grid))]
-    [TemplatePart(Name = "ItemHighlightrMBI", Type = typeof(Border))]
+    [TemplatePart(Name = "ItemHighlightMenuBarItem", Type = typeof(Grid))]
+    [TemplatePart(Name = "ItemHighlightBorderMenuBarItem", Type = typeof(Border))]
     [TemplatePart(Name = "ItemText_copyMBI", Type = typeof(TextBlock))]
-    [TemplatePart(Name = "ItemDropDownMBI", Type = typeof(Canvas))]
-    [TemplatePart(Name = "RootMenuBarI", Type = typeof(Border))]
+    [TemplatePart(Name = "ItemDropDownMenuBarItem", Type = typeof(Canvas))]
+    [TemplatePart(Name = "RootItemDropDownMenuBarItem", Type = typeof(Border))]
     [TemplatePart(Name = "RootMenuBar", Type = typeof(Border))]
-    [TemplatePart(Name = "itemHolderMBI", Type = typeof(StackPanel))]
-
+    [TemplatePart(Name = "ItemHolderMenuBarItem", Type = typeof(StackPanel))]
+    
     [TemplateVisualState(Name = "ItemHighlightedMBI", GroupName = "menuNavigationMBI")]
     [TemplateVisualState(Name = "noneHighlightedMBI", GroupName = "menuNavigationMBI")]
     [TemplateVisualState(Name = "ItemSelectedMBI", GroupName = "menuNavigationMBI")]
@@ -38,14 +38,14 @@ namespace MenuControl
 
         //graphic components
         private Grid LayoutRootMenuBarItem;
-        private Border ItemrMBI;
+        private Border ItemBorderMenuBarItem;
         private TextBlock ItemTextMBI;
-        private Grid ItemHighlightMBI;
-        private Border ItemHighlightrMBI;
-        private TextBlock ItemText_copyMBI;
-        private Canvas ItemDropDownMBI;
-        private Border RootMenuBarI;
-        private StackPanel itemHolderMBI;
+        private Grid ItemHighlightMenuBarItem;
+        private Border ItemHighlightBorderMenuBarItem;
+        //private TextBlock ItemText_copyMBI;
+        private Canvas ItemDropDownMenuBarItem;
+        private Border RootItemDropDownMenuBarItem;
+        private StackPanel ItemHolderMenuBarItem;
         private StackPanel RootMenuBar;
 
         private DispatcherTimer MouseOverTimer;
@@ -56,7 +56,7 @@ namespace MenuControl
         {
             get
             {
-                return ItemDropDownMBI.Visibility == System.Windows.Visibility.Visible;
+                return ItemDropDownMenuBarItem.Visibility == System.Windows.Visibility.Visible;
             }
         }
 
@@ -86,21 +86,21 @@ namespace MenuControl
         {
             base.OnApplyTemplate();
             LayoutRootMenuBarItem = (Grid)GetTemplateChild("LayoutRootMenuBarItem");
-            ItemrMBI = (Border)GetTemplateChild("ItemrMBI");
+            ItemBorderMenuBarItem = (Border)GetTemplateChild("ItemBorderMenuBarItem");
             ItemTextMBI = (TextBlock)GetTemplateChild("ItemTextMBI");
-            ItemHighlightMBI = (Grid)GetTemplateChild("ItemHighlightMBI");
-            ItemHighlightrMBI = (Border)GetTemplateChild("ItemHighlightrMBI");
-            ItemText_copyMBI = (TextBlock)GetTemplateChild("ItemText_copyMBI");
-            ItemDropDownMBI = (Canvas)GetTemplateChild("ItemDropDownMBI");
-            RootMenuBarI = (Border)GetTemplateChild("RootMenuBarI");
+            ItemHighlightMenuBarItem = (Grid)GetTemplateChild("ItemHighlightMenuBarItem");
+            ItemHighlightBorderMenuBarItem = (Border)GetTemplateChild("ItemHighlightBorderMenuBarItem");
+            //ItemText_copyMBI = (TextBlock)GetTemplateChild("ItemText_copyMBI");
+            ItemDropDownMenuBarItem = (Canvas)GetTemplateChild("ItemDropDownMenuBarItem");
+            RootItemDropDownMenuBarItem = (Border)GetTemplateChild("RootItemDropDownMenuBarItem");
             RootMenuBar = (StackPanel)GetTemplateChild("RootMenuBar");
-            itemHolderMBI = (StackPanel)GetTemplateChild("itemHolderMBI");
+            ItemHolderMenuBarItem = (StackPanel)GetTemplateChild("ItemHolderMenuBarItem");
 
 
-            ItemHighlightMBI.MouseEnter += new MouseEventHandler(ItemHighlight_MouseEnter);
-            ItemHighlightMBI.MouseLeftButtonDown += new MouseButtonEventHandler(ItemHighlight_MouseLeftButtonDown);
-            ItemHighlightMBI.MouseLeave += new MouseEventHandler(ItemHighlight_MouseLeave);
-            ItemDropDownMBI.MouseLeave += new MouseEventHandler(ItemDropDown_MouseLeave);
+            LayoutRootMenuBarItem.MouseEnter += new MouseEventHandler(ItemHighlight_MouseEnter);
+            LayoutRootMenuBarItem.MouseLeftButtonDown += new MouseButtonEventHandler(ItemHighlight_MouseLeftButtonDown);
+            LayoutRootMenuBarItem.MouseLeave += new MouseEventHandler(ItemHighlight_MouseLeave);
+            ItemDropDownMenuBarItem.MouseLeave += new MouseEventHandler(ItemDropDown_MouseLeave);
         }
 
         void MenuBarItem_Loaded(object sender, RoutedEventArgs e)
@@ -115,8 +115,8 @@ namespace MenuControl
                 ItemTextMBI.Height = xy.Y;
                 ItemTextMBI.Text = MenuText;
                 //ItemText_copyMBI.Width = xy.X;
-                ItemText_copyMBI.Height = xy.Y;
-                ItemText_copyMBI.Text = MenuText;
+                //ItemText_copyMBI.Height = xy.Y;
+                //ItemText_copyMBI.Text = MenuText;
 
                 //set width and height for canvas
                 if (LayoutRootMenuBarItem.Width <= xy.X + 20)
@@ -124,12 +124,12 @@ namespace MenuControl
                 if (LayoutRootMenuBarItem.Height <= xy.Y + 10)
                     LayoutRootMenuBarItem.Height = xy.Y + 10;
 
-                ItemHighlightMBI.Width = LayoutRootMenuBarItem.Width;// xy.X + 15;
-                ItemHighlightMBI.Height = LayoutRootMenuBarItem.Height;//xy.Y + 10;
-                ItemHighlightrMBI.Width = LayoutRootMenuBarItem.Width;
-                ItemHighlightrMBI.Height = LayoutRootMenuBarItem.Height;
-                ItemrMBI.Width = LayoutRootMenuBarItem.Width;
-                ItemrMBI.Height = LayoutRootMenuBarItem.Height;
+                ItemHighlightMenuBarItem.Width = LayoutRootMenuBarItem.Width;// xy.X + 15;
+                ItemHighlightMenuBarItem.Height = LayoutRootMenuBarItem.Height;//xy.Y + 10;
+                ItemHighlightBorderMenuBarItem.Width = LayoutRootMenuBarItem.Width;
+                ItemHighlightBorderMenuBarItem.Height = LayoutRootMenuBarItem.Height;
+                ItemBorderMenuBarItem.Width = LayoutRootMenuBarItem.Width;
+                ItemBorderMenuBarItem.Height = LayoutRootMenuBarItem.Height;
 
                 this.Width = LayoutRootMenuBarItem.Width;
                 this.Height = LayoutRootMenuBarItem.Height;
@@ -143,25 +143,23 @@ namespace MenuControl
                 xy.X += 15; //add space for arrow placement
 
                 //set menu holder dimensions
-                ItemDropDownMBI.Width = xy.X + 23;
-                RootMenuBarI.Width = xy.X + 23;
+                ItemDropDownMenuBarItem.Width = xy.X + 23;
+                RootItemDropDownMenuBarItem.Width = xy.X + 23;
 
-                Canvas RootMenuBarItem = (Canvas)GetTemplateChild("RootMenuBarItem");
-
-                ItemDropDownMBI.SetValue(Canvas.TopProperty, Height); //LayoutRootMenuBarItem.Height);
+                ItemDropDownMenuBarItem.SetValue(Canvas.TopProperty, Height); //LayoutRootMenuBarItem.Height);
 
                 // height is the height of the textbox plus 10 since we add 10
                 // for the box around the text box. Then multiply by count and add 10
                 // for margins
-                ItemDropDownMBI.Height = (xy.Y + 10) * (Items.Count) + 8;
-                RootMenuBarI.Height = (xy.Y + 10) * (Items.Count) + 8;
+                ItemDropDownMenuBarItem.Height = (xy.Y + 10) * (Items.Count) + 8;
+                RootItemDropDownMenuBarItem.Height = (xy.Y + 10) * (Items.Count) + 8;
 
                 foreach (MenuItem item in Items)
                 {
                     //set menuItem dimensions before adding
                     item.setDimension(xy);
                     item.parentMenuBarItem = this;
-                    itemHolderMBI.Children.Add(item);
+                    ItemHolderMenuBarItem.Children.Add(item);
                 }
             }
         }
@@ -191,14 +189,14 @@ namespace MenuControl
             {
                 item.CollapseDropDown();
             }
-            ItemDropDownMBI.Visibility = Visibility.Collapsed;
+            ItemDropDownMenuBarItem.Visibility = Visibility.Collapsed;
         }
 
         public void ShowDropDown()
         {
             VisualStateManager.GoToState(this, "ItemSelectedMBI", true);
 
-            ItemDropDownMBI.Visibility = Visibility.Visible;
+            ItemDropDownMenuBarItem.Visibility = Visibility.Visible;
         }
 
         internal void CollapseChildDropDownMenus()
