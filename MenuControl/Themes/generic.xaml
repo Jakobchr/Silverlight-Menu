@@ -1,0 +1,196 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:GenericControl="clr-namespace:MenuControl"
+    xmlns:vsm="clr-namespace:System.Windows;assembly=System.Windows">
+
+
+    <Style TargetType="GenericControl:MenuBar">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                    <GradientStop Color="#f8f4f3fc" Offset="0.0"/>
+                    <GradientStop Color="#f8d4d8e6" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GenericControl:MenuBar">
+                    <StackPanel Height="{TemplateBinding Height}" x:Name="RootMenuBar"
+                                Orientation="Horizontal"
+                                Background="{TemplateBinding Background}"
+                                />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="GenericControl:MenuBarItem">
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Width" Value="36"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#FF000000"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GenericControl:MenuBarItem">
+                    <Canvas Canvas.ZIndex="1000" x:Name="RootMenuBarItem">
+                        
+                        <vsm:VisualStateManager.VisualStateGroups>
+                            <vsm:VisualStateGroup x:Name="menuNavigationMBI">
+                                <vsm:VisualState x:Name="ItemHighlightedMBI">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" 
+                                                                       Storyboard.TargetName="ItemHighlightMBI" 
+                                                                       Storyboard.TargetProperty="(UIElement.Opacity)">
+                                            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </vsm:VisualState>
+                                <vsm:VisualState x:Name="ItemSelectedMBI">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" 
+                                                                       Storyboard.TargetName="ItemrMBI" 
+                                                                       Storyboard.TargetProperty="(UIElement.Opacity)">
+                                            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" 
+                                                                       Storyboard.TargetName="ItemHighlightMBI" 
+                                                                       Storyboard.TargetProperty="(UIElement.Opacity)">
+                                            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </vsm:VisualState>
+                                <vsm:VisualState x:Name="noneHighlightedMBI"/>
+                            </vsm:VisualStateGroup>
+                        </vsm:VisualStateManager.VisualStateGroups>
+
+                        <Grid x:Name="LayoutRootMenuBarItem" 
+                              Height="{TemplateBinding Height}" 
+                              Width="{TemplateBinding Width}" 
+                              Background="{TemplateBinding Background}">
+                            
+                            <Border Height="{TemplateBinding Height}" 
+                                    Width="{TemplateBinding Width}" 
+                                    x:Name="ItemrMBI" Opacity="0" BorderBrush="Gray"
+                                    BorderThickness="1,1,1,0">
+
+                            </Border>
+                            <TextBlock Height="{TemplateBinding Height}" Text="NaN" x:Name="ItemTextMBI" Canvas.ZIndex="0" 
+                                       Foreground="{TemplateBinding Foreground}"
+                                       TextWrapping="Wrap" 
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                       />
+
+                            <Grid x:Name="ItemHighlightMBI" Opacity="0" Canvas.Left="0" Canvas.Top="0" >
+                                <Border x:Name="ItemHighlightrMBI" Opacity="1"  BorderBrush="Gray" BorderThickness="1" >
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Color="#aaf1f8fb" Offset="0.0"/>
+                                            <GradientStop Color="#aabae4f6" Offset="1.0"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                                
+                                <TextBlock Text="NaN" 
+                                           x:Name="ItemText_copyMBI" 
+                                           Canvas.ZIndex="0"
+
+                                           Foreground="{TemplateBinding Foreground}" TextWrapping="Wrap" 
+                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                           />
+                                <!--<ContentPresenter />-->
+                            </Grid>
+                        </Grid>
+
+                        <Canvas Height="92" Width="166" x:Name="ItemDropDownMBI" Opacity="1" Visibility="Collapsed" Canvas.Left="0" Canvas.Top="26">
+                            <Border x:Name="RootMenuBarI" Height="87.334" Width="166"
+                                    Canvas.ZIndex="1" Canvas.Left="0" Canvas.Top="0" CornerRadius="0,0,0,0" BorderBrush="Gray" BorderThickness="1,0,1,1" >
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                        <GradientStop Color="#f8f4f3fc" Offset="0.0"/>
+                                        <GradientStop Color="#f8d4d8e6" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                            <StackPanel x:Name="itemHolderMBI" Orientation="Vertical" Canvas.Left="0" Canvas.Top="0" Canvas.ZIndex="2">
+                            </StackPanel>
+                        </Canvas>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="GenericControl:MenuItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GenericControl:MenuItem">
+                    <Canvas x:Name="LayoutRootMI">
+                        
+                        <vsm:VisualStateManager.VisualStateGroups>
+                            <vsm:VisualStateGroup x:Name="menuNavigationMI">
+                                <vsm:VisualState x:Name="ItemHighlightedMI">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ItemHighlightMI" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                                            <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </vsm:VisualState>
+                                <vsm:VisualState x:Name="noneHighlightedMI">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ItemHighlightMI" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                                            <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </vsm:VisualState>
+                            </vsm:VisualStateGroup>
+                        </vsm:VisualStateManager.VisualStateGroups>
+                        
+                        <Canvas Height="19" x:Name="LayoutRootMI2" Background="Transparent" Width="14" >
+                            <Image x:Name="ElementIcon" Stretch="None" Canvas.Left="4" Canvas.Top="9"/>
+                            <TextBlock x:Name="ItemTextMI"   Canvas.Left="22" Canvas.Top="9" Height="17" Width="90" Canvas.ZIndex="0" TextWrapping="Wrap" Foreground="#000000" Text="Default"></TextBlock>
+                            <Path x:Name="arrow" Visibility="Collapsed" Canvas.Left="87" Canvas.Top="13" Height="8" Width="6" Fill="#FF000000" Stretch="Fill"  Data="M329.83331,173.49998 L329.83331,185.99998 L340.99969,179.83331 z" RenderTransformOrigin="0.5,0.5" />
+
+                            <!-- Highlighted interface -->
+                            <Canvas Height="19" x:Name="ItemHighlightMI" Width="149" Opacity="0" Canvas.ZIndex="1" Canvas.Left="0" Canvas.Top="0" >
+                                <Border Height="19"  x:Name="ItemHighlightrMI" Width="162" Opacity="1" Canvas.Left="4" Canvas.Top="4" BorderBrush="{x:Null}">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Color="#aaf1f8fb" Offset="0.0"/>
+                                            <GradientStop Color="#aabae4f6" Offset="1.0"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                                <TextBlock x:Name="ItemText_copyMI" Canvas.Left="22" Canvas.Top="9" Canvas.ZIndex="0" Height="17" Width="90" TextWrapping="Wrap" Foreground="#000000" Text="Default"></TextBlock>
+                                <Path x:Name="arrowHighlight" Visibility="Collapsed" Canvas.Left="77" Canvas.Top="13" Height="8" Width="6" Fill="#FF000000" Stretch="Fill"  Data="M329.83331,173.49998 L329.83331,185.99998 L340.99969,179.83331 z" RenderTransformOrigin="0.5,0.5" />
+                            </Canvas>
+
+                            <!-- nested menu interface -->
+                            <Canvas x:Name="SubMenuDropDown" Opacity="1">
+                                <Canvas Height="92" Width="166" x:Name="ItemDropDownMI"  Visibility="Collapsed" Canvas.Left="0" Canvas.Top="0" Canvas.ZIndex="1">
+                                    <Border Height="87.334" x:Name="baseRectMI" Width="166" Canvas.Left="0" Canvas.Top="0" BorderBrush="Gray" BorderThickness="1" >
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                                <GradientStop Color="#f8f4f3fc" Offset="0.0"/>
+                                                <GradientStop Color="#f8d4d8e6" Offset="1.0"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+                                    <StackPanel x:Name="itemHolderMI" Orientation="Vertical" Canvas.Left="0" Canvas.Top="0" Canvas.ZIndex="2"></StackPanel>
+                                </Canvas>
+                            </Canvas>
+
+                        </Canvas>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
